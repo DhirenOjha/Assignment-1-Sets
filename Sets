@@ -1,0 +1,228 @@
+
+#include <stdio.h>
+#define size 5
+int acc(int *p,int a);
+int display(int *p,int a);
+int uni(int *p,int *s);
+int inter(int *p,int *s);
+int diff(int *p,int *s);
+int sym(int *p,int *s);
+
+int main()
+{
+    int c,b;
+    int arr1[size],arr2[size];
+    acc(arr1,1);
+    acc(arr2,2);
+    display(arr1,1);
+    display(arr2,2);
+    abc:
+    printf("Choose the follwing-\n");
+    printf("1. Union\n");
+    printf("2. Intersection\n");
+    printf("3. Difference- (Array1 from Array2)\n");
+    printf("4. Difference- (Array2 from Array1)\n");
+    printf("5. Symmetric Difference-\n");
+    scanf("%d",&c);
+    switch(c)
+    {
+        case 1:
+        {
+            uni(arr1,arr2);
+            break;
+        }
+        case 2:
+        {
+            inter(arr1,arr2);
+            break;
+        }
+        case 3:
+        {
+            diff(arr1,arr2);
+            break;
+        }
+        case 4:
+        {
+            diff(arr2,arr1);
+            break;
+        }
+        case 5:
+        {
+            sym(arr1,arr2);
+            break;
+        }
+        default:
+        {
+            printf("Invalid Input\n");
+            break;
+        }
+    }
+    printf("Exit- 1/0\n");
+    scanf("%d",&b);
+    if(b==1)
+    {
+        return 0;
+    }
+    else 
+    {
+        goto abc;
+    }
+    
+    return 0;
+}
+int acc(int *p,int a)
+{
+    int i;
+    printf("Enter array- %d\n",a);
+    for(i=0;i<size;i++)
+    {
+        scanf("%d",&p[i]);
+    }
+    return 0;
+}
+int display(int *p,int a)
+{
+    int i;
+    printf("Array- %d\n",a);
+    for(i=0;i<size;i++)
+    {
+        printf("%d\n",p[i]);
+    }
+    return 0;
+}
+
+int uni(int *p,int *s)
+{
+    int un[size*2];
+    int i,j,count=0,k=0;
+    
+    for(i=0;i<size;i++)
+    {
+        un[i]=p[i];
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if(s[i]==p[j])
+            {
+                count++;
+                break;
+            }
+        }
+        
+        if(count==0)
+        {
+            un[size+k]=s[i];
+            k++;
+        }
+        count=0;
+    }
+    
+    printf("Union-\n");
+    for(i=0;i<size+k;i++)
+    {
+        printf("%d\n",un[i]);
+    }
+    return 0;
+}
+int inter(int *p,int *s)
+{
+    int in[size];
+    int i,j,k=0;
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if(p[i]==s[j])
+            {
+                in[k]=p[i];
+                k++;
+            }
+        }
+        
+    }
+    printf("Intersection-\n");
+    for(i=0;i<k;i++)
+    {
+        printf("%d\n",in[i]);
+    }
+}
+int diff(int *p,int *s)
+{
+    int dif[size];
+    int i,j,k=0,count=0;
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if(p[i]==s[j])
+            {
+                count++;
+                break;
+            }
+        }
+        
+        if(count==0)
+        {
+            dif[k]=p[i];
+            k++;
+        }
+        count=0;
+    }
+    printf("Difference-\n");
+    {
+        for(i=0;i<k;i++)
+        {
+            printf("%d\n",dif[i]);
+        }
+    }
+}
+int sym(int *p,int *s)
+{
+    int sy[size*2];
+    int i,j,count=0,k=0;
+    
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if(p[i]==s[j])
+            {
+                count++;
+                break;
+            }
+        }
+        
+        if(count==0)
+        {
+            sy[k]=p[i];
+            k++;
+        }
+        count=0;
+    }
+    for(i=0;i<size;i++)
+    {
+        for(j=0;j<size;j++)
+        {
+            if(s[i]==p[j])
+            {
+                count++;
+                break;
+            }
+        }
+        
+        if(count==0)
+        {
+            sy[k]=s[i];
+            k++;
+        }
+        count=0;
+    }
+    printf("Symmetric Difference-\n");
+    for(i=0;i<k;i++)
+    {
+        printf("%d\n",sy[i]);
+    }
+    return 0;
+}
